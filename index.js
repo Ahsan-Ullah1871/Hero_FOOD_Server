@@ -61,36 +61,6 @@ client.connect((err) => {
 			res.send(documents);
 		});
 	});
-
-	// Update Cart Quantity:
-	app.patch("/updateQuantity/:id", (req, res) => {
-		CartCollection.updateOne(
-			{ _id: ObjectId(req.params.id) },
-			{
-				$set: {
-					productQuantity: req.body.productQuantity,
-				},
-			}
-		).then((result) => {
-			res.send(result.modifiedCount !== 0);
-		});
-	});
-
-	// Delete a product from cart Items:
-	app.delete("/itemDelete/:id", (req, res) => {
-		CartCollection.deleteOne({
-			_id: ObjectId(req.params.id),
-		}).then((result) => {
-			res.send(result.deletedCount > 0);
-		});
-	});
-
-	// Post Product:
-	app.post("/orders", (req, res) => {
-		console.log(req.body);
-	});
-
-	// client.close();
 });
 
 app.listen(5000);
